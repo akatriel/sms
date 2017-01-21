@@ -1,0 +1,3 @@
+<li id="<%= stock.id %>"> 
+	Ticker: <%= stock.symbol %> <%= link_to "Show", stock_path(stock) %> | <%= link_to "Delete", stock_path(stock), method: :delete, remote: true %>
+</li>
