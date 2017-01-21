@@ -10,17 +10,21 @@
 		<hr>
 		<%= form_tag @stock, remote: true do %>
 			<%= label_tag :ticker %>
-			<%= text_field_tag :ticker,"Enter Ticker", autofocus: true %>
+			<%= text_field_tag :ticker,"", autofocus: true %>
 			<%= submit_tag "Add", 'data-disable-with' => "Please wait.." %>
 		<% end %>
-
-		<h1>Portfolio</h1>
 		<hr>
-		<ul id="stocks">
-			<% render @stocks %>
-		</ul>
-		<% form_tag messages_path do %>
-			<% submit_tag "Send SMS", class: "btn btn-primary" %>
+		<% if @stocks.exists? %>
+			<h1>Portfolio</h1>
+			<hr>
+			<ul id="stocks">
+				<%= render @stocks || "There are no stocks in your portfolio yet."%>
+			</ul>
+			<% form_tag messages_path do %>
+				<% submit_tag "Send SMS", class: "btn btn-primary" %>
+			<% end %>
+		<% else %>
+			<h2>Enter a Ticker Symbol Above</h2>
 		<% end %>
 	</div>
 </div>
