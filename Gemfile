@@ -58,3 +58,4 @@ gem 'phonelib'
 gem 'bootstrap-sass'
 gem 'quandl'
 gem 'dotiw' ##for distonce_of_time_in_words
+gem 'bcrypt'

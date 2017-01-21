@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  symbol: MyString
+  company: MyString
+  exchange: MyString
+  latestDate: 2017-01-21 15:27:50
+  previousOpen: 9.99
+  previousClose: 9.99
+  previousHigh: 9.99
+  previousLow: 9.99
+  marketCap: MyString
+  volume: 1
+
+two:
+  symbol: MyString
+  company: MyString
+  exchange: MyString
+  latestDate: 2017-01-21 15:27:50
+  previousOpen: 9.99
+  previousClose: 9.99
+  previousHigh: 9.99
+  previousLow: 9.99
+  marketCap: MyString
+  volume: 1

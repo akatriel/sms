@@ -1,24 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+	<div class="center">
+		<p id="notice"><%= notice %></p>
+		<p class="text-danger"></p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+		<h1> Welcome, <%= @user.username %> </h1>
+		<%= link_to 'Edit User Info', edit_user_path(@user) %>
+		<br>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+		<hr>
+		<%= form_tag @stock, remote: true do %>
+			<%= label_tag :ticker %>
+			<%= text_field_tag :ticker,"", autofocus: true %>
+			<%= submit_tag "Add", 'data-disable-with' => "Please wait.." %>
+		<% end %>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @user.phone %>
-</p>
-
-<p>
-  <strong>Password digest:</strong>
-  <%= @user.password_digest %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+		<h1>Portfolio</h1>
+		<hr>
+		<ul id="stocks">
+			<%= render @stocks %>
+		</ul>
+		<%= form_tag messages_path do %>
+			<%= submit_tag "Send SMS", class: "btn btn-primary" %>
+		<% end %>
+	</div>
+</div>
