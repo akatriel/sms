@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @stocks = @user.stocks
+    @stock = Stock.new
   end
 
   # GET /users/new

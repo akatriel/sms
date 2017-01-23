@@ -14,17 +14,15 @@
 			<%= submit_tag "Add", 'data-disable-with' => "Please wait.." %>
 		<% end %>
 		<hr>
-		<% if @stocks.exists? %>
+		
 			<h1>Portfolio</h1>
 			<hr>
 			<ul id="stocks">
-				<%= render @stocks || "There are no stocks in your portfolio yet."%>
+				<%= render @stocks %>
 			</ul>
 			<% form_tag messages_path do %>
 				<% submit_tag "Send SMS", class: "btn btn-primary" %>
 			<% end %>
-		<% else %>
-			<h2>Enter a Ticker Symbol Above</h2>
-		<% end %>
+		
 	</div>
 </div>
