@@ -36,6 +36,7 @@ class StocksController < ApplicationController
 					flash.now[:notice] = "#{ticker} was updated"
 				end
 			end
+			flash.now[:notice] = "#{ticker} was already in your portfolio"
 		else
 			# Because Motley Fool contains ETF data
 			# and is more reliable
@@ -73,10 +74,19 @@ class StocksController < ApplicationController
 					notice: "#{stock.symbol} has been added to your portfolio!"
 				}
 			else
-				flash[:alert] = "We could not add that stock to your portfolio."
 				# flash.now[:alert] = "We could not add that stock to your portfolio."
-				format.html{redirect_to user_path(@user)}
+				format.html{redirect_to user_path(@user), flash:{
+						alert: "We could not add that stock to your portfolio."}} and return
 			end
+		end
+	end
+
+	def destroy
+		@stock = Stock.find params[:id]
+		@stock.destroy
+
+		respond_to do |format|
+			format.js
 		end
 	end
 
