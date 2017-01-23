@@ -13,13 +13,11 @@ class StocksController < ApplicationController
 			has_stock = true
 
 			stock = stock.first
-			byebug
 			# #######################################
 			# if the latestPriceDate is older than the previous market date then update from api
 			# TODO refactor check for upToDate?
 			# TODO consider weekends and holidays
 			if stock.latestDate.nil? || stock.latestDate >= Date.yesterday
-				byebug
 				# need to update model
 				fools_response = clean_fool_payload ticker
 
@@ -81,6 +79,20 @@ class StocksController < ApplicationController
 		end
 	end
 
+	def show
+		@stock = Stock.find params[:id]
+		
+		# need to check if quandl/wiki information has been added to entry, if not then a call to api needs to be made.
+		
+		# need to check if the stock has wiki data, then if its updated as of yesterdays close data. Probably will put this on scheduler
+
+		# need to check if wiki has stock, if not then proceed
+		dataset = clean_wiki_payload @stock.symbol
+		if dataset
+			@stock.update(dataset)
+		end
+	end
+
 	def destroy
 		@stock = Stock.find params[:id]
 		@stock.destroy
@@ -99,11 +111,11 @@ class StocksController < ApplicationController
 		# returns false if cant find
 		if dataset != false
 			return {
-				date:dataset.date,
-				open: dataset.open,
-				close: dataset.close,
-				high: dataset.high,
-				low:dataset.low,
+				previousOpenDate: dataset.date,
+				previousOpen: dataset.open,
+				previousClose: dataset.close,
+				previousHigh: dataset.high,
+				previousLow:dataset.low,
 				volume: dataset.volume
 			}
 		else
