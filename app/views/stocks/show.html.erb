@@ -1,0 +1,28 @@
+
+<div class="container">
+	<h1><%= @stock.symbol %> - <%= @stock[:companyName] %></h1>
+	<hr>
+	<h2>Data from Motley fool:</h2>
+	<div class="container waContainer text-center">
+		<h4>
+			Quote: <%= @stock[:latestPrice] %> | 
+
+			Updated at: <%= distance_of_time_in_words(Time.now, @stock[:latestDate]) %> ago |
+
+			<%= @stock[:exchange] %>
+		</h4> 
+		<h4>Market Cap: <%= @stock[:marketCap] %></h4>
+	</div>
+
+	<h2>Previous Market Close Data:</h2>
+	<div>
+		<ul class="list-group">
+			<li class="list-group-item"><p>Date: <%= @stock.previousOpenDate %></p></li>
+			<li class="list-group-item"><p>Previous Open: <%= @stock.previousOpen %></p></li>
+			<li class="list-group-item"><p>Previous Close: <%= @stock.previousClose %></p></li>
+			<li class="list-group-item"><p>Previous High: <%= @stock.previousHigh %></p></li>
+			<li class="list-group-item"><p>Previous Low: <%= @stock.previousLow %></p></li>
+			<li class="list-group-item"><p>Volume: <%= @stock.volume %></p></li>
+		</ul>
+	</div>
+</div>
