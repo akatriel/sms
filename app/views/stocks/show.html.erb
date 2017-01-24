@@ -7,7 +7,7 @@
 		<h4>
 			Quote: <%= @stock[:latestPrice] %> | 
 
-			Updated at: <%= distance_of_time_in_words Time.now, @stock[:latestPriceDate] %> ago |
+			Updated at: <%= distance_of_time_in_words(Time.now, @stock[:latestDate]) %> ago |
 
 			<%= @stock[:exchange] %>
 		</h4> 

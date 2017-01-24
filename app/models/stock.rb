@@ -2,15 +2,17 @@ class Stock < ApplicationRecord
 	has_many :assets
 	has_many :users, through: :assets
 
+
+
 	def self.get_fool ticker
 		ticker = ticker.upcase
 		apikey = ENV["FOOL_KEY"]
 		url = "http://www.fool.com/a/caps/ws/Ticker/#{ticker}?apikey=#{apikey}"
-		begin
+		# begin
 			HTTParty.get url
-		rescue
-			return false
-		end
+		# rescue
+			# return false
+		# end
 	end
 
 	Quandl::ApiConfig.api_key = 'exAUgh8NLoYAjuwd22PH'
@@ -26,5 +28,9 @@ class Stock < ApplicationRecord
 		rescue
 			return false
 		end
+	end
+
+	def self.get_from_yahoo ticker
+
 	end
 end

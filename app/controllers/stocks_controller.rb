@@ -80,17 +80,7 @@ class StocksController < ApplicationController
 	end
 
 	def show
-		@stock = Stock.find params[:id]
 		
-		# need to check if quandl/wiki information has been added to entry, if not then a call to api needs to be made.
-		
-		# need to check if the stock has wiki data, then if its updated as of yesterdays close data. Probably will put this on scheduler
-
-		# need to check if wiki has stock, if not then proceed
-		dataset = clean_wiki_payload @stock.symbol
-		if dataset
-			@stock.update(dataset)
-		end
 	end
 
 	def destroy
