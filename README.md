@@ -1,24 +1,5 @@
-# README
+SMS = Stock Message Service
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails App for sending text message updates of stocks from a created portfolio
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Set alerts and general information updates
