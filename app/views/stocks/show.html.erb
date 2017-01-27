@@ -1,32 +1,36 @@
 <div class="container">
 	<h1><%= @stock.symbol %> - <%= @stock.name %></h1>
+	<button id="openModal" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Set Price Alerts</button>
 	<hr />
-	<div class="container">
-		<ul class="list-group row is-flex">
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Ask:</strong><br /> <%= @stock.ask %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Avg. Daily Volume:</strong><br /> <%= @stock.average_daily_volume%></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Bid:</strong><br /> <%= @stock.bid %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Book Value:</strong><br /> <%= @stock.book_value %></li>
-			<!-- Add highlighting for minus -->
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Change:</strong><br /> <%= @stock.change %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Change From Year High:</strong><br /> <%= @stock.change_from_year_high %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Change From Year Low:</strong><br /><%= @stock.change_from_year_low %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Change and Percent Change:</strong><br /> <%= @stock.change_percent_change %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Percent Change: </strong><br /><%= @stock.changein_percent %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Day's High:</strong><br /> <%= @stock.days_high %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Day's Low:</strong><br /> <%= @stock.days_low %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Fifty Day Moving Average:</strong><br /> <%= @stock.fiftyday_moving_average %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Last Trade Date:</strong><br /> <%= @stock.last_trade_date %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Last Trade Price:</strong><br /> <%= @stock.last_trade_price_only %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Last Trade Time:</strong><br /> <%= @stock.last_trade_time %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Market Cap:</strong><br /> <%= @stock.market_capitalization %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>One Year Target Price:</strong><br /> <%= @stock.oneyr_target_price %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Open:</strong><br /> <%= @stock.open %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Exchange:</strong><br /> <%= @stock.stock_exchange %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Year High:</strong><br /> <%= @stock.year_high %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Year Low:</strong><br /> <%= @stock.year_low %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Price / Sales:</strong><br /> <%= @stock.price_sales %></li>
-			<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Short Ratio:</strong><br /> <%= @stock.short_ratio %></li>
-		</ul>
+	<%= render 'partials/stock_info' %>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<%= form_tag "/setAsset", method: "POST", remote: true do %>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Set Price Alerts</h4>
+				</div>
+				<div class="modal-body">
+
+					<%= hidden_field_tag :asset_id, @asset.id %>
+					<div class="form-group">
+						<%= label_tag :high, "Set High:" %>
+						<%= text_field_tag :high, @asset.high, class: "form-control" %>
+					</div>
+					<div class="form-group">
+						<%= label_tag :low, "Set Low:" %>
+						<%= text_field_tag :low, @asset.low, class: "form-control" %>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<%= submit_tag "Save", class: "btn btn-primary", disable_with: "Saving..." %>
+				</div>
+			<% end %>
+		</div>
 	</div>
 </div>

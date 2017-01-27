@@ -21,20 +21,20 @@ class StocksController < ApplicationController
 				stock = stock.first
 				# #######################################
 				# if the latestPriceDate is older than the previous market date then update from api
-				# TODO consider weekends and holidays
+				# TODO add holidays to db
 				# #######################################
-				if stock_is_within_market_hours stock.updated_at and (1.hour.ago <=> stock.updated_at) >= 0
+				# if is_within_market_hours and (1.hour.ago <=> stock.updated_at) >= 0
 
 					# If we are inside market hours and the stock hasnt been updated in the db recently (1hr) we need to update model
-					old_stock = stock
-					new_stock = StockQuote::Stock.quote tidy_ticker(ticker)
+					# old_stock = stock
+					# new_stock = StockQuote::Stock.quote tidy_ticker(ticker)
 
 					#  updates every single stock of that user that is out of date with the data returned from the most recent quote
 					# @user.stocks.update hashify_stock(stock)
 					
 					# add asset if none exists
-					old_stock.update hashify_stock new_stock
-				end
+					# old_stock.update hashify_stock new_stock
+				# end
 				# if we get here then the stock is already in the db and up to date we just need to link it as an asset for the user
 
 				# check for existing asset between stock and user if not create
@@ -77,6 +77,20 @@ class StocksController < ApplicationController
 
 	def show
 		@stock = Stock.find params[:id]
+		@asset = @stock.assets.where(user_id: current_user.id, stock_id: @stock.id).first
+
+		# if is_within_market_hours and (1.hour.ago <=> @stock.updated_at) >= 0
+
+			# If we are inside market hours and the stock hasnt been updated in the db recently (1hr) we need to update model
+			
+			new_stock = StockQuote::Stock.quote @stock.symbol
+			#  updates every single stock of that user that is out of date with the data returned from the most recent quote
+			# @user.stocks.update hashify_stock(stock)
+			
+			# add asset if none exists
+			@stock.update hashify_stock new_stock
+		# end
+
 	end
 
 	def destroy
@@ -94,14 +108,12 @@ class StocksController < ApplicationController
 		ticker.split(',').map{|s| s.strip }.join(',')
 	end
 
-	def stock_is_within_market_hours update_time
+	def is_within_market_hours
 		# may eventually need to abstract this to handle markets  in different time zones
 
-		local_update_time = update_time.in_time_zone("Eastern Time (US & Canada)")
 		local_time = Time.now.in_time_zone "Eastern Time (US & Canada)"
-
 		# between 10am and 4 pm EST and during a weekday
-		if local_update_time.hour >= 10 and local_update_time.hour <= 16 and local_time.wday >= 1 and local_time.wday <= 5
+		if local_time.hour >= 10 and local_time.hour <= 16 and local_time.wday >= 1 and local_time.wday <= 5
 			true
 		else 
 			false
@@ -165,5 +177,6 @@ class StocksController < ApplicationController
 		year_low:stock.year_low,
 		year_range:stock.year_range
 		}
+		# .reject{|k,v| v.blank?}
 	end
 end
