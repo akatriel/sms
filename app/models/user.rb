@@ -4,9 +4,10 @@ class User < ApplicationRecord
 
 	before_save   :downcase_email
 
-	validates :phone, phone: true
+	validates :phone, phone: true, uniqueness:true
 	# Phonelib.valid_for_country? '123456789', 'XX'   # checks if passed value is valid number for specified country
-
+	validates :username, presence: true, length: {minimum: 3}, uniqueness: true
+	validates :password, length: {in: 6..20}, confirmation: true
 
 	has_secure_password
 

@@ -1,5 +1,5 @@
 <div class="container">
-	<h1><%= @stock.symbol %> - <%= @stock.name %></h1>
+	<h1><%= @stock.symbol %> - <%= @stock.name %> - <%= @stock.stock_exchange %></h1>
 	<button id="openModal" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Set Price Alerts</button>
 	<hr />
 	<%= render 'partials/stock_info' %>

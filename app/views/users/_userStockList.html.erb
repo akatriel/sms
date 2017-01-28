@@ -1,3 +1,0 @@
-<% stocks.each do |p| %>
-	<li>Ticker: <%= p.symbol %> <%= link_to "Show", stock_path(p) %> | <%= link_to "Delete", stock_path(p), method: :delete %></li>
-<% end %>

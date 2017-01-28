@@ -67,6 +67,7 @@ GEM
     ffi (1.9.17)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    holidays (5.3.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     httparty (0.14.0)
@@ -203,6 +204,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   dotiw
+  holidays
   httparty
   jbuilder (~> 2.5)
   jquery-rails
