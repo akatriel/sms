@@ -7,4 +7,4 @@ class Stock < ApplicationRecord
 	# def stock_updated_after_close
 	# 	self.last_trade_time
 	# end
-end	
+end
