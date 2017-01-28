@@ -14,7 +14,7 @@
 		<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Day's High:</strong><br /> <%= @stock.days_high %></li>
 		<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Day's Low:</strong><br /> <%= @stock.days_low %></li>
 		<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Fifty Day Moving Average:</strong><br /> <%= @stock.fiftyday_moving_average %></li>
-		<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Last Trade Date:</strong><br /> <%= @stock.last_trade_date %></li>
+		<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Last Trade Date:</strong><br /><%= @stock.last_trade_date.strftime '%m/%d/%Y' %></li>
 		<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Last Trade Price:</strong><br /> <%= @stock.last_trade_price_only %></li>
 		<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Last Trade Time:</strong><br /> <%= @stock.last_trade_time %></li>
 		<li class="list-group-item col-xs-6 col-sm-4 col-md-3"><strong>Market Cap:</strong><br /> <%= @stock.market_capitalization %></li>

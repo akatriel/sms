@@ -121,9 +121,6 @@ class StocksController < ApplicationController
 	end
 
 	private
-	def get_stock
-
-	end
 
 	def tidy_ticker ticker 
 		ticker.split(',').map{|s| s.strip }.join(',')
@@ -133,11 +130,14 @@ class StocksController < ApplicationController
 		# may eventually need to abstract this to handle markets  in different time zones
 
 		local_time = Time.now.in_time_zone "Eastern Time (US & Canada)"
+		weekday = false
+		weekend = false
+		holiday = false
 		# between 10am and 4 pm EST and during a weekday
 		if local_time.hour >= 10 and local_time.hour <= 16 and local_time.wday >= 1 and local_time.wday <= 5
-			true
+			weekday = true
 		else 
-			false
+			weekend = true
 		end
 	end
 
@@ -168,7 +168,7 @@ class StocksController < ApplicationController
 		eps_estimate_next_year:stock.eps_estimate_next_year,
 		ex_dividend_date:stock.ex_dividend_date,
 		fiftyday_moving_average:stock.fiftyday_moving_average,
-		last_trade_date:stock.last_trade_date,
+		last_trade_date: Date.strptime(stock.last_trade_date, "%m/%d/%Y"),
 		last_trade_price_only:stock.last_trade_price_only,
 		last_trade_time:stock.last_trade_time,
 		last_trade_with_time:stock.last_trade_with_time,
