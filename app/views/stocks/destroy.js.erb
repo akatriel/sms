@@ -1,2 +1,2 @@
-alert('stock deleted!');
 $("#<%= @stock.id %>").slideUp();
+$('#flashy').replaceWith("<%= j render 'partials/flash_messages' %>");

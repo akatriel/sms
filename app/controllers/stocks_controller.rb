@@ -6,6 +6,8 @@ class StocksController < ApplicationController
 		splitTicker = tidy_ticker(ticker).split(',')
 		
 		up_to_date = false
+		couldnt_find_stocks = []
+		found_stocks = []
 		has_stock = false
 
 		# need to store each ticker that we cant find into separate object	
@@ -39,21 +41,37 @@ class StocksController < ApplicationController
 
 				# check for existing asset between stock and user if not create
 				unless Asset.where(user_id:@user.id, stock_id: stock.id).exists?
+
 					Asset.create(user_id: @user.id, stock_id: stock.id)
+					found_stocks << stock.symbol
 				end
 			else
 				stocks = StockQuote::Stock.quote tidy_ticker(ticker)
 
-				if stocks.class == StockQuote::Stock
+				# if 0 are returned
+				if stocks.response_code == 404
+
+				has_stock = false
+				couldnt_find_stocks << ticker
+				# if only 1 is returned
+				elsif stocks.class == StockQuote::Stock
+
 					@user.stocks.create hashify_stock(stocks)
+					has_stock = true
+					found_stocks << stocks.symbol
+				# if multiple are returned
 				else
 					stocks.each do |stock|
 						if stock.success?
+
 							@user.stocks.create hashify_stock(stock)
+							found_stocks << stock.symbol
+						else
+
 						end		
 					end	
+					has_stock = true
 				end
-				has_stock = true
 			end
 		end
 		
@@ -62,16 +80,14 @@ class StocksController < ApplicationController
 		# ^^ needed for create.js.erb
 
 		respond_to do |format|
-			if has_stock
-				format.js
-				format.html { 
-					redirect_to user_path(@user)
-				}
+			if couldnt_find_stocks.size == 0
+				flash.now[:notice] = found_stocks.join(', ') + " have been added to your profile"
 			else
-				# flash.now[:alert] = "We could not add that stock to your portfolio."
-				format.html{redirect_to user_path(@user), flash:{
-						alert: "We could not add that stock to your portfolio."}} and return
+				flash.now[:alert] = couldnt_find_stocks.join(', ') + " couldn't be added"
 			end
+
+			format.html{render user_path(@user)}
+			format.js
 		end
 	end
 
@@ -95,14 +111,19 @@ class StocksController < ApplicationController
 
 	def destroy
 		@stock = Stock.find params[:id]
-		@stock.destroy
+		asset = @stock.assets.where(stock_id: @stock.id, user_id: current_user.id).first
+		flash.now[:alert] = "#{@stock.symbol} has been removed"
+		asset.destroy
 
 		respond_to do |format|
 			format.js
 		end
 	end
 
-	private 
+	private
+	def get_stock
+
+	end
 
 	def tidy_ticker ticker 
 		ticker.split(',').map{|s| s.strip }.join(',')

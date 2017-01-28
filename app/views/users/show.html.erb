@@ -1,12 +1,8 @@
 <div class="container">
 	<div class="center">
-		<p id="notice"><%= notice %></p>
-		<p class="text-danger"></p>
-
 		<h1> Welcome, <%= @user.username %> </h1>
 		<%= link_to 'Edit User Info', edit_user_path(@user) %>
 		<br>
-
 		<hr>
 		<%= form_tag @stock, remote: true do %>
 			<%= label_tag :ticker, "Multiple stocks can be added by separating tickers with a comma:" %><br/>
