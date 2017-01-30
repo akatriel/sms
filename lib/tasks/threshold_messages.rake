@@ -13,19 +13,18 @@ namespace :threshold_messages do
 				to_message = false
 
 				if !asset.high.nil?
-					if asset.high >= price
-						byebug
+					if asset.high <= price
 						to_message = true
 					end
 				end
 				if !asset.low.nil? and !to_message
-					if asset.low <= price
+					if asset.low >= price
 						to_message = true
 					end
 				end
 
 				if to_message
-					message_body = "Symbol: #{symbol}\nLast Trade Price: #{price}\n #{trade_time} on #{trade_date}"
+					message_body = "\nSymbol: #{symbol}\nLast Trade Price: #{price}\n #{trade_time} on #{trade_date}"
 
 					count += send_message asset.user.phone, message_body, asset
 					
