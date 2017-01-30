@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: akatriel
+  database: postgres
   username: sms
   password: <%= ENV['SMS_DATABASE_PASSWORD'] %>
