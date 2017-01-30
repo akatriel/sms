@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if params[:password] == params[:password_confirmation] and @user.save
-        format.html { redirect_to :root, notice: 'User was successfully created.' }
+        format.html { redirect_to login_path, notice: 'User was successfully created.' }
       else
         format.html { render :new }
       end
@@ -38,8 +38,9 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
+    session.clear
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to :root, notice: 'User was successfully destroyed.' }
     end
   end
 
