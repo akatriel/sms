@@ -6,10 +6,14 @@ namespace :threshold_messages do
 		count = 0
 		assets.each do |asset|
 			unless asset.stock.nil?
-				symbol = asset.stock.symbol
-				price = asset.stock.last_trade_price_only
-				trade_time = asset.stock.last_trade_time
-				trade_date = asset.stock.last_trade_date.strftime '%m/%d/%Y'
+				a_stock = asset.stock
+				symbol = a_stock.symbol
+
+				a_stock.update hashify_stock symbol
+				price = a_stock.last_trade_price_only
+				trade_time = a_stock.last_trade_time
+				trade_date = a_stock.last_trade_date.strftime '%m/%d/%Y'
+
 				to_message = false
 
 				if !asset.high.nil?
@@ -21,7 +25,7 @@ namespace :threshold_messages do
 					if asset.low >= price
 						to_message = true
 					end
-				end
+				end	
 
 				if to_message
 					message_body = "\nSymbol: #{symbol}\nLast Trade Price: #{price}\n #{trade_time} on #{trade_date}"
@@ -55,4 +59,64 @@ def send_message phone, body, asset
 		asset.previous_success = false
 		return 0
 	end
+end
+
+def hashify_stock stock
+	return {
+	ask:stock.ask,
+	average_daily_volume:stock.average_daily_volume,
+	bid:stock.bid,
+	book_value:stock.book_value,
+	change:stock.change,
+	change_from_fiftyday_moving_average:stock.change_from_fiftyday_moving_average,
+	change_from_two_hundredday_moving_average:stock.change_from_two_hundredday_moving_average,
+	change_from_year_high:stock.change_from_year_high,
+	change_from_year_low:stock.change_from_year_low,
+	change_percent_change:stock.change_percent_change,
+	changein_percent:stock.changein_percent,
+	# currency:stock.currency,
+	days_high:stock.days_high,
+	days_low:stock.days_low,
+	days_range:stock.days_range,
+	dividend_pay_date:stock.dividend_pay_date,
+	dividend_share:stock.dividend_share,
+	dividend_yield:stock.dividend_yield,
+	earnings_share:stock.earnings_share,
+	ebitda:stock.ebitda,
+	eps_estimate_current_year:stock.eps_estimate_current_year,
+	eps_estimate_next_quarter:stock.eps_estimate_next_quarter,
+	eps_estimate_next_year:stock.eps_estimate_next_year,
+	ex_dividend_date:stock.ex_dividend_date,
+	fiftyday_moving_average:stock.fiftyday_moving_average,
+	last_trade_date: Date.strptime(stock.last_trade_date, "%m/%d/%Y"),
+	last_trade_price_only:stock.last_trade_price_only,
+	last_trade_time:stock.last_trade_time,
+	last_trade_with_time:stock.last_trade_with_time,
+	market_capitalization:stock.market_capitalization,
+	name:stock.name,
+	oneyr_target_price:stock.oneyr_target_price,
+	open:stock.open,
+	pe_ratio:stock.pe_ratio,
+	peg_ratio:stock.peg_ratio,
+	percebt_change_from_year_high:stock.percebt_change_from_year_high,
+	percent_change:stock.percent_change,
+	percent_change_from_fiftyday_moving_average:stock.percent_change_from_fiftyday_moving_average,
+	# percent_change_from_two_hundredday_moving_a:stock.percent_change_from_two_hundredday_moving_a,
+	percent_change_from_year_low:stock.percent_change_from_year_low,
+	previous_close:stock.previous_close,
+	price_book:stock.price_book,
+	price_eps_estimate_current_year:stock.price_eps_estimate_current_year,
+	price_eps_estimate_next_year:stock.price_eps_estimate_next_year,
+	price_sales:stock.price_sales,
+	response_code:stock.response_code,
+	short_ratio:stock.short_ratio,
+	stock_exchange:stock.stock_exchange,
+	symbol:stock.symbol,
+	two_hundredday_moving_average:stock.two_hundredday_moving_average,
+	volume:stock.volume,
+	year_high:stock.year_high,
+	year_low:stock.year_low,
+	year_range:stock.year_range
+	}
+	# .reject{|k,v| v.blank?}
 end
