@@ -5,7 +5,6 @@ class AssetsController < ApplicationController
 		low = params[:low].nil? ? nil : params[:low]
 		start_time = make_time params[:asset]["start_time(4i)"], params[:asset]["start_time(5i)"]
 		finish_time = make_time params[:asset]["finish_time(4i)"], params[:asset]["finish_time(5i)"]
-		byebug
 		respond_to do |format|
 			if asset.update_attributes high: high, low:low, start_time: start_time, finish_time: finish_time
 				flash.now[:notice] = "Alert Has Been Set"
