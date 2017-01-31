@@ -17,7 +17,7 @@ namespace :threshold_messages do
 				trade_date = a_stock.last_trade_date.strftime '%m/%d/%Y'
 
 				to_message = false
-				if !asset.start_time.nil? and !asset.finish_time.nil? and asset.start_time <= Time.now and asset.finish_time >= Time.now
+				if !asset.start_time.nil? and !asset.finish_time.nil? and asset.start_time.in_time_zone('Eastern Time (US & Canada)') <= Time.now.in_time_zone('Eastern Time (US & Canada)') and asset.finish_time.in_time_zone('Eastern Time (US & Canada)') >= Time.now.in_time_zone('Eastern Time (US & Canada)')
 					if !asset.high.nil?
 						if asset.high <= price
 							to_message = true
