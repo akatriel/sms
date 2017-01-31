@@ -8,11 +8,11 @@ namespace :threshold_messages do
 			unless asset.stock.nil?
 				a_stock = asset.stock
 				symbol = a_stock.symbol
-
+				byebug
 				payload = StockQuote::Stock.quote @stock.symbol
 				
 				a_stock.update(hashify_stock payload)
-
+				byebug
 				price = a_stock.last_trade_price_only
 				trade_time = a_stock.last_trade_time
 				trade_date = a_stock.last_trade_date.strftime '%m/%d/%Y'
