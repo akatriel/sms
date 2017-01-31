@@ -95,18 +95,14 @@ class StocksController < ApplicationController
 		@stock = Stock.find params[:id]
 		@asset = @stock.assets.where(user_id: current_user.id, stock_id: @stock.id).first
 
-		# if is_within_market_hours and (1.hour.ago <=> @stock.updated_at) >= 0
-
-			# If we are inside market hours and the stock hasnt been updated in the db recently (1hr) we need to update model
-			
+		begin
 			new_stock = StockQuote::Stock.quote @stock.symbol
-			#  updates every single stock of that user that is out of date with the data returned from the most recent quote
-			# @user.stocks.update hashify_stock(stock)
-			
-			# add asset if none exists
-			@stock.update hashify_stock new_stock
-		# end
 
+			@stock.update hashify_stock new_stock
+		rescue
+			flash[:alert] = "There was a problem getting info on that ticker"
+			redirect_to user_path(@user)
+		end
 	end
 
 	def destroy
