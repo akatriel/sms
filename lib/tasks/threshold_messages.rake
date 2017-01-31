@@ -31,6 +31,7 @@ namespace :threshold_messages do
 
 					if to_message
 						message_body = "\nSymbol: #{symbol}\nLast Trade Price: #{price}\n #{trade_time} on #{trade_date}"
+						message_body << "\nfinance.yahoo.com/quote/#{symbol}?p=#{symbol}"
 
 						count += send_message asset.user.phone, message_body, asset
 						
