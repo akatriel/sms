@@ -8,33 +8,33 @@ namespace :threshold_messages do
 			unless asset.stock.nil?
 				a_stock = asset.stock
 				symbol = a_stock.symbol
-				byebug
-				payload = StockQuote::Stock.quote @stock.symbol
 				
+				payload = StockQuote::Stock.quote symbol
 				a_stock.update(hashify_stock payload)
-				byebug
+
 				price = a_stock.last_trade_price_only
 				trade_time = a_stock.last_trade_time
 				trade_date = a_stock.last_trade_date.strftime '%m/%d/%Y'
 
 				to_message = false
-
-				if !asset.high.nil?
-					if asset.high <= price
-						to_message = true
+				if asset.start_time <= Time.now and asset.finish_time >= Time.now
+					if !asset.high.nil?
+						if asset.high <= price
+							to_message = true
+						end
 					end
-				end
-				if !asset.low.nil? and !to_message
-					if asset.low >= price
-						to_message = true
+					if !asset.low.nil? and !to_message
+						if asset.low >= price
+							to_message = true
+						end
+					end	
+
+					if to_message
+						message_body = "\nSymbol: #{symbol}\nLast Trade Price: #{price}\n #{trade_time} on #{trade_date}"
+
+						count += send_message asset.user.phone, message_body, asset
+						
 					end
-				end	
-
-				if to_message
-					message_body = "\nSymbol: #{symbol}\nLast Trade Price: #{price}\n #{trade_time} on #{trade_date}"
-
-					count += send_message asset.user.phone, message_body, asset
-					
 				end
 			end
 		end

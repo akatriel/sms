@@ -25,6 +25,14 @@
 						<%= label_tag :low, "Set Low:" %>
 						<%= text_field_tag :low, @asset.low, class: "form-control" %>
 					</div>
+					<div class="form-group">
+						<%= label_tag :start_time, "Set Start Time:" %>
+						<%= time_select :asset, :start_time, {minute_step: 15} %>
+					</div>
+					<div class="form-group">
+						<%= label_tag :finish_time, "Set End Time:" %>
+						<%= time_select :asset, :finish_time, {minute_step: 15} %>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
