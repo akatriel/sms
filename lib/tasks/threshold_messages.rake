@@ -8,9 +8,10 @@ namespace :threshold_messages do
 			unless asset.stock.nil?
 				a_stock = asset.stock
 				symbol = a_stock.symbol
+
 				payload = StockQuote::Stock.quote @stock.symbol
 				
-				a_stock.update hashify_stock payload
+				a_stock.update(hashify_stock payload)
 
 				price = a_stock.last_trade_price_only
 				trade_time = a_stock.last_trade_time
