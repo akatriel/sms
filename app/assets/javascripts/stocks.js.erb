@@ -1,0 +1,16 @@
+$(document).on('turbolinks:load', function(){
+	var items = [];
+	$('ul .list-group-item').click(function(){
+		$(this).toggleClass('selected');
+		var $box = $(this).find('input:checkbox');
+		$($box).prop("checked", !$box.is(":checked"));
+	});
+});
+
+function toggleArrayItem(a, v) {
+    var i = a.indexOf(v);
+    if (i === -1)
+        a.push(v);
+    else
+        a.splice(i, 1);
+}

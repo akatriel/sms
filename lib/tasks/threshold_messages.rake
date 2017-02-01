@@ -9,8 +9,8 @@ namespace :threshold_messages do
 				a_stock = asset.stock
 				symbol = a_stock.symbol
 				
-				payload = StockQuote::Stock.quote symbol
-				a_stock.update(hashify_stock payload)
+				new_stock = StockQuote::Stock.quote symbol
+				a_stock.update(hashify_stock new_stock)
 
 				price = a_stock.last_trade_price_only
 				trade_time = a_stock.last_trade_time
@@ -31,9 +31,27 @@ namespace :threshold_messages do
 					end	
 
 					if to_message
-						message_body = "\nSymbol: #{symbol}\nLast Trade Price: #{price}\n #{trade_time} on #{trade_date}"
-						message_body << "\nfinance.yahoo.com/quote/#{symbol}?p=#{symbol}"
+						message_options = []
+						asset.payload.attributes.each do |k, v| 
+							message_options << k if v == true
+						end
+						if message_options.size == 0
+							message_body = "\nSymbol: #{symbol}\nLast Trade Price: #{price}\n #{trade_time} on #{trade_date}"
+							message_body << "\nfinance.yahoo.com/quote/#{symbol}?p=#{symbol}"
+						else 
+							display_text = Displaytext.first
+							if display_text.nil?
+								display_text = Displaytext.new
+								display_text.add_display_text
+								display_text.save
+							end 
 
+							message_body = "Symbol: "  + symbol + "\n"
+							message_options.each do |option|
+								header = display_text[option + "_display_text"] << ": "
+								message_body += header << a_stock[option].to_s + "\n"
+							end
+						end
 						count += send_message asset.user.phone, message_body, asset
 						
 					end
@@ -58,10 +76,12 @@ def send_message phone, body, asset
 		)
 		asset.sent_at = DateTime.now
 		asset.previous_success = true
+		asset.save
 		return 1
 	rescue
 		asset.sent_at = DateTime.now
 		asset.previous_success = false
+		asset.save
 		return 0
 	end
 end
