@@ -33,9 +33,10 @@ namespace :threshold_messages do
 					if to_message
 						message_options = []
 						if asset.payload.nil?
-							asset.payload.new
-							asset.payload.default_payload
-							asset.save
+							pay = Payload.new
+							pay.default_payload
+							pay.asset_id = asset.id
+							pay.save
 						end
 						asset.payload.attributes.each do |k, v| 
 							message_options << k if v == true
