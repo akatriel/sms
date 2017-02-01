@@ -39,7 +39,8 @@ namespace :threshold_messages do
 							pay.save
 						else
 							asset.payload.attributes.each do |k, v| 
-							message_options << k if v == true
+								message_options << k if v == true
+							end
 						end
 						
 						if message_options.size == 0
