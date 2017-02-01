@@ -37,10 +37,11 @@ namespace :threshold_messages do
 							pay.default_payload
 							pay.asset_id = asset.id
 							pay.save
-						end
-						asset.payload.attributes.each do |k, v| 
+						else
+							asset.payload.attributes.each do |k, v| 
 							message_options << k if v == true
 						end
+						
 						if message_options.size == 0
 							message_body = "\nSymbol: #{symbol}\nLast Trade Price: #{price}\n #{trade_time} on #{trade_date}"
 							message_body << "\nfinance.yahoo.com/quote/#{symbol}?p=#{symbol}"
