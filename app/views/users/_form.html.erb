@@ -12,23 +12,28 @@
     </div>
   <% end %>
 
-  <div class="form-group">
+  <div class="input-field">
+    <i class="material-icons prefix">account_circle</i>
     <%= f.label :username %>
-    <%= f.text_field :username, class: 'form-control' %>
+    <%= f.text_field :username, class: 'form-control', autofocus:true %>
   </div>
-  <div class="form-group">
+  <div class="input-field">
+    <i class="material-icons prefix">vpn_key</i>
     <%= f.label :password %>
     <%= f.password_field :password, class: 'form-control' %>
   </div>
-  <div class="form-group">
+  <div class="input-field">
+    <i class="material-icons prefix">vpn_key</i>
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, class: 'form-control' %>
   </div>
-  <div class="form-group">
+  <div class="input-field">
+    <i class="material-icons prefix">email</i>
     <%= f.label :email %>
     <%= f.email_field :email, class: 'form-control' %>
   </div>
-  <div class="form-group">
+  <div class="input-field">
+    <i class="material-icons prefix">phone</i>
     <%= f.label :phone %>
     <%= f.phone_field :phone, class: 'form-control' %>
   </div>
