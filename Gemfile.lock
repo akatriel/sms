@@ -39,12 +39,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.4)
-    autoprefixer-rails (6.6.1)
-      execjs
     bcrypt (3.1.11)
-    bootstrap-sass (3.3.7)
-      autoprefixer-rails (>= 5.2.1)
-      sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.0.6)
     coderay (1.1.1)
@@ -67,7 +62,6 @@ GEM
     ffi (1.9.17)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    holidays (5.3.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     httparty (0.14.0)
@@ -89,6 +83,8 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    materialize-sass (0.97.8)
+      sass (~> 3.3)
     method_source (0.8.2)
     mime-types (2.99.3)
     mini_portile2 (2.1.0)
@@ -108,10 +104,6 @@ GEM
     pry-rails (0.3.4)
       pry (>= 0.9.10)
     puma (3.6.2)
-    quandl (1.0.3)
-      activesupport (>= 4.2.3)
-      json (~> 1.8.3)
-      rest-client (~> 1.8.0)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -200,20 +192,18 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt
-  bootstrap-sass
   byebug
   coffee-rails (~> 4.2)
   dotiw
-  holidays
   httparty
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
+  materialize-sass
   pg (~> 0.18)
   phonelib
   pry-rails
   puma (~> 3.0)
-  quandl
   rails (~> 5.0.1)
   sass-rails (~> 5.0)
   spring

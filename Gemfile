@@ -55,10 +55,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 ###added###
 gem 'twilio-ruby', '~> 4.11.1'
 gem 'phonelib'
-gem 'bootstrap-sass'
-gem 'quandl'
 gem 'dotiw' ##for distonce_of_time_in_words
 gem 'bcrypt'
 gem 'httparty'
 gem 'stock_quote'
-gem 'holidays'
+gem 'materialize-sass'
+
