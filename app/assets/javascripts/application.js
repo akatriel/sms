@@ -29,6 +29,9 @@ $(document).on('turbolinks:load', function() {
 		donetext: 'OK',
 		autoclose: false,
 		vibrate: true, // vibrate the device when dragging clock hand
+		afterDone: function(){
+			Materialize.updateTextFields();
+		}
 	});
 	$('#saveBTN').click(function(){
 		var startTime = $('#startTime').val();
