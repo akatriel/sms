@@ -3,10 +3,27 @@ class AssetsController < ApplicationController
 		asset = Asset.find params[:asset_id]
 		high = params[:high].nil? ? nil : params[:high]
 		low = params[:low].nil? ? nil : params[:low]
-		start_time = make_time params[:asset]["start_time(4i)"], params[:asset]["start_time(5i)"]
-		finish_time = make_time params[:asset]["finish_time(4i)"], params[:asset]["finish_time(5i)"]
+
+		unless params[:start_time].empty? and params[:finish_time].empty?
+			byebug
+			start_time = params[:start_time].to_time
+			start_time = start_time.in_time_zone('Eastern Time (US & Canada)')
+			finish_time = params[:finish_time].to_time
+			finish_time = finish_time.in_time_zone('Eastern Time (US & Canada)')
+			if (finish_time <=> start_time) <= 0
+				finish_time = finish_time + 1.day
+			end
+		end
+
+		
+
 		respond_to do |format|
-			if asset.update_attributes high: high, low:low, start_time: start_time, finish_time: finish_time
+			if finish_time.nil? || start_time.nil?
+				# TODO display flash message and display it within modal instead of rendering page again.
+				flash.now[:alert] = "Could not set alert. Check start and finish times."
+				format.html {render stock_path asset.stock_id}
+			end
+			if (asset.update_attributes high: high, low:low, start_time: start_time, finish_time: finish_time)
 				flash.now[:notice] = "Alert Has Been Set" #not showing
 				format.js{ render file: 'assets/_set_asset_success.js.erb'}
 			end
@@ -41,13 +58,6 @@ class AssetsController < ApplicationController
 				format.js{ render file: 'assets/_payload_customized.js.erb'}
 			end
 		end
-	end
-
-
-	private 
-	def make_time hour, minute
-		time = hour << ":" << minute
-		time.to_time.in_time_zone('Eastern Time (US & Canada)')
 	end
 end
 

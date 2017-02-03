@@ -8,43 +8,4 @@
 	<%= render 'partials/stock_info' %>
 </div>
 
-<!-- Modal -->
-<div class="modal bottom-sheet" id="myModal">
-	<div class="modal-content">
-		<%= form_tag "/setAsset", method: "POST", remote: true do %>
-			<div class="modal-header center">
-				<h4>Set Price Alerts</h4>
-			</div>
-			<div class="modal-body">
-				<%= hidden_field_tag :asset_id, @asset.id %>
-				<div class="input-field inline">
-					<%= label_tag :high, "Set High:" %>
-					<%= number_field_tag :high, @asset.high, step: 0.01 %>
-				</div>
-				<div class="input-field inline">
-					<%= label_tag :low, "Set Low:" %>
-					<%= number_field_tag :low, @asset.low, step: 0.01 %>
-				</div>
-				<div class="row">
-                    <div class="input-field inline">
-                        <label for="start_time">Start Time</label>
-                        <input id="start_time" class="timepicker" type="time">
-                    </div>
-                    <%= hidden_field_tag :start_time, @asset.start_time %>
-                    
-                     <div class="input-field inline">
-                        <label for="finish_time">Finish Time</label>
-                        <input id="finish_time" class="timepicker" type="time">
-                    </div>
-                    <%= hidden_field_tag :finish_time, @asset.finish_time %>
-                </div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<%= button_tag class: "btn", disable_with: "Saving..." do %>
-					 <i class="material-icons left">input</i>Save
-				<% end %>
-			</div>
-		<% end %>
-	</div>
-</div>
+<%= render 'partials/stock_modal' %>

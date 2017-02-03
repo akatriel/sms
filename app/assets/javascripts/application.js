@@ -18,8 +18,6 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
-	Materialize.updateTextFields();
-	$('select').material_select();
 	$('#openModal').click( function(){
 		$('.modal').modal({
 			dismissible: true
@@ -31,8 +29,13 @@ $(document).on('turbolinks:load', function() {
 		donetext: 'OK',
 		autoclose: false,
 		vibrate: true, // vibrate the device when dragging clock hand
-		afterDone: function(Element, Time) {
-	        console.log(Element, Time)
-	    }
 	});
+	$('#saveBTN').click(function(){
+		var startTime = $('#startTime').val();
+		var finishTime = $('#finishTime').val();
+
+		$('#start_time').val(startTime);
+		$('#finish_time').val(finishTime);
+	});
+	Materialize.updateTextFields();
 });

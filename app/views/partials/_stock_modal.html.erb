@@ -1,0 +1,41 @@
+<!-- Modal -->
+<div class="modal bottom-sheet" id="myModal">
+	<div class="modal-content">
+		<%= form_tag "/setAsset", method: "POST", remote: true do %>
+			<div class="modal-header center">
+				<h4>Set Price Alerts</h4>
+				<p class="center">If the finish time is before the start time the program will assume that the finish time is for the next day.</p>
+			</div>
+			<div class="modal-body center">
+				<%= hidden_field_tag :asset_id, @asset.id %>
+				<div class="input-field inline">
+					<%= label_tag :high, "Set High:" %>
+					<%= number_field_tag :high, @asset.high, step: 0.01 %>
+				</div>
+				<div class="input-field inline">
+					<%= label_tag :low, "Set Low:" %>
+					<%= number_field_tag :low, @asset.low, step: 0.01 %>
+				</div>
+				<div class="row">
+                    <div class="input-field inline">
+                        <label for="start_time">Start Time</label>
+                        <input id="startTime" class="timepicker" name="start_time" type="time" class="active">
+                        <%= hidden_field_tag :start_time, '' %>
+                    </div>
+                   
+                     <div class="input-field inline">
+                        <label for="finish_time">Finish Time</label>
+                        <input id="finishTime" class="timepicker" name="finish_time" type="time" class="active">
+                        <%= hidden_field_tag :finish_time, '' %>
+                    </div>
+                </div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" onClick="$('.modal').modal('close');">Close</button>
+				<%= button_tag id: "saveBTN", class: "btn", disable_with: "Saving..." do %>
+					 <i class="material-icons left">input</i>Save
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+</div>
