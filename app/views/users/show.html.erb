@@ -1,24 +1,26 @@
 <div class="container">
 	<div class="center">
 		<h1> Welcome, <%= @user.username %> </h1>
-		<%= link_to 'Edit User Info', edit_user_path(@user) %>
-		<br>
-		<hr>
-		<%= form_tag @stock, remote: true do %>
-			<%= label_tag :ticker, "Multiple stocks can be added by separating tickers with a comma:" %><br/>
-			<%= text_field_tag :ticker,"", autofocus: true %>
-			<%= submit_tag "Add", 'data-disable-with' => "Please wait.." %>
+		<%= link_to edit_user_path(@user), class: "btn waves-effect waves-light btn" do %>
+			      <i class="material-icons left">mode_edit</i>
+					Edit User Info
 		<% end %>
-		<hr>
-		
-			<h1>Portfolio</h1>
-			<hr>
-			<ul id="stocks">
-				<%= render @stocks %>
-			</ul>
-			<% form_tag messages_path do %>
-				<% submit_tag "Send SMS", class: "btn btn-primary" %>
+		<div class="container">
+			<%= form_tag @stock, remote: true do %>
+				<div class="input-field inline"
+					<%= label_tag :ticker, "Multiple stocks can be added by separating tickers with a comma:" %><br/>
+					<%= text_field_tag :ticker,"", autofocus: true %>
+				</div>
+				<%= button_tag type: "submit", 'data-disable-with' => "Please wait..", class: "btn waves-effect waves-light" do %>
+					<i class="material-icons">add</i>
+				<% end %>
 			<% end %>
-		
+		</div>
+		<hr>
 	</div>
+			
+	<ul id="stocks" class="collection with-header">
+		<li class="collection-header"><h2>Portfolio</h2></li>
+		<%= render @stocks %>
+	</ul>
 </div>

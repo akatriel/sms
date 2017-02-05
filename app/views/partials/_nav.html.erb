@@ -1,36 +1,33 @@
-<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" aria-expanded="false" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="/">Stock Message Service</a>	
-			</div>
-			<div class="collapse navbar-collapse" role="navigation">
-				<ul class="nav nav-pills navbar-right" id="mnav">
-					<% if !current_user %>
-						<li><%= link_to "Sign Up For Stock SMS Updates", new_user_path, class: "btn btn-primary btn-lg test" %></li>
-						<li>
-							<%= link_to login_path, class: "btn btn-primary btn-lg test" do %>
-								<span class="glyphicon glyphicon-log-in"></span> Login
-							<% end %>
-						</li>
-					<% else %>
-						<li>
-							<%= link_to user_path(current_user.id), class: "btn btn-primary btn-lg" do%>
-								<span class="glyphicon glyphicon-stats"></span> Portfolio
-							<% end %>
-						</li>
-						<li>
-							<%= link_to logout_path, class: "btn btn-primary btn-lg", method: :delete do %>
-								<span class="glyphicon glyphicon-off"></span> Logout
-							<% end %>
-						</li>
+<nav>
+	<div class="nav-wrapper">
+		<%= link_to :root, class: "brand-logo center" do %>
+			<i class="medium material-icons left">textsms</i>Stock Message Service
+		<% end %>
+		<ul id="nav-mobile" class="left hide-on-med-and-down">
+			<% if !current_user %>
+				<li>
+					<%= link_to new_user_path, class: "" do %>
+						<i class="medium material-icons left">perm_contact_calendar</i>Sign Up for SMS Updates
 					<% end %>
-				</ul>
-			</div>
-		</div>
-	</nav>
+				</li>
+				<li>
+					<%= link_to login_path, class: "" do %>
+						<i class="medium material-icons left">lock_open</i>Login
+					<% end %>
+				</li>
+			<% else %>
+				<li>
+					<%= link_to user_path(current_user.id), class: "" do %>
+						<i class="medium material-icons left">perm_identity</i>Portfolio 
+					<% end %>
+				</li>
+				<li>
+					<%= link_to logout_path, class: "", method: :delete do %>
+						<i class="medium material-icons left">lock_outline</i>Logout
+
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+</nav>

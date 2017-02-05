@@ -13,5 +13,32 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require bootstrap-sprockets
+//= require materialize-sprockets
+//= require materialize.clockpicker
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+	$('#openModal').click( function(){
+		$('.modal').modal({
+			dismissible: true
+		});
+	});
+	$('.timepicker').pickatime({
+	    default: 'now',
+		twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
+		donetext: 'OK',
+		autoclose: false,
+		vibrate: true, // vibrate the device when dragging clock hand
+		afterDone: function(){
+			Materialize.updateTextFields();
+		}
+	});
+	$('#saveBTN').click(function(){
+		var startTime = $('#startTime').val();
+		var finishTime = $('#finishTime').val();
+
+		$('#start_time').val(startTime);
+		$('#finish_time').val(finishTime);
+	});
+	Materialize.updateTextFields();
+});

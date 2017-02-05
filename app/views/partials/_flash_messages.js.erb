@@ -1,0 +1,3 @@
+<% flash.each do |type, message| %>
+  Materialize.toast("<%= message.html_safe %>", 4000) // 4000 is the duration of the toast
+<% end %>
