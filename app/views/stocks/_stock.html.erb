@@ -1,5 +1,6 @@
 <li id="<%= stock.id %>" class="collection-item"> 
-	Ticker: <%= stock.symbol %> 
+	<%= stock.symbol %> 
+	<div class="secondary-content">
 	<%= link_to stock_path(stock), class: "btn-floating waves-effect waves-light" do %> 
 		<i class="material-icons">insert_chart</i>
 	<% end %>
@@ -7,4 +8,5 @@
 	<%= link_to stock_path(stock), method: :delete, remote: true, class: "btn-floating waves-effect waves-light" do %>
 		<i class="material-icons">delete</i>
 	<% end %>
+	</div>
 </li>

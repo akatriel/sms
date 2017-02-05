@@ -5,7 +5,6 @@ class AssetsController < ApplicationController
 		low = params[:low].nil? ? nil : params[:low]
 
 		unless params[:start_time].empty? and params[:finish_time].empty?
-			byebug
 			start_time = params[:start_time].to_time
 			start_time = start_time.in_time_zone('Eastern Time (US & Canada)')
 			finish_time = params[:finish_time].to_time
