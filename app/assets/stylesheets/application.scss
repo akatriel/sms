@@ -24,19 +24,17 @@
 	
 }
 
-
-.row.is-flex {
-    display: flex;
-    flex-wrap: wrap;
+// form errors on user CRUD
+ul {
+	li.error {
+		color: color("red", "base");
+	}
 }
-.row.is-flex > [class*='col-'] {
-    display: flex;
-    flex-direction: column;
+// Safari Modal fix with clockpicker
+div#myModal.modal.bottom-sheet.open{
+	overflow: visible;
 }
 
-// .is-flex {
-// 	li:hover {
-// 		background: #337ab7;
-// 		color:white; 
-// 	}
-// }
+.collection-item {
+	overflow:hidden;
+}

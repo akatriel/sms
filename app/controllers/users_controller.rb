@@ -21,8 +21,8 @@ class UsersController < ApplicationController
       if params[:password] == params[:password_confirmation] and @user.save
         format.html { redirect_to login_path, notice: 'User was successfully created.' }
       else
-        flash.now[:alert] = "Crazy shit"
-        format.html { render 'new'}
+        flash.now[:alert] = "There was an issue..."
+        format.html { render 'new' }
       end
     end
   end
