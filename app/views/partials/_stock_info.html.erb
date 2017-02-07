@@ -2,351 +2,353 @@
 
 	<%= form_tag "/setPayload", method: "post", remote: true do %>
 		<%= hidden_field_tag "id", @asset.id %>
+
 		<ul class="collection row">
 			<li class="collection-item col s12 m4">
+				
+				<strong>Last Trade Date:</strong><br /><%= @stock.last_trade_date.strftime '%m/%d/%Y' %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-						<%= check_box_tag "payload[]", "last_trade_date", false %>
-							<span class="lever"></span>
+						<%= check_box_tag "payload[]",
+						"last_trade_date",
+						@payload["last_trade_date"] ? true : false %>
+						<span class="lever"></span>
 						On
-						</label>
-					</div>
-				<div class="">
-				<strong>
-				Last Trade Date:</strong><br /><%= @stock.last_trade_date.strftime '%m/%d/%Y' %>
+					</label>
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Last Trade Time:</strong><br /> <%= @stock.last_trade_time %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "last_trade_time", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"last_trade_time",
+						@payload["last_trade_time"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Last Trade Time:</strong><br /> <%= @stock.last_trade_time %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Last Trade Price:</strong><br /> <%= @stock.last_trade_price_only %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "last_trade_price_only", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"last_trade_price_only",
+						@payload["last_trade_price_only"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Last Trade Price:</strong><br /> <%= @stock.last_trade_price_only %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Avg. Daily Volume:</strong><br /> <%= @stock.average_daily_volume%>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "average_daily_volume", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"average_daily_volume",
+						@payload["average_daily_volume"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Avg. Daily Volume:</strong><br /> <%= @stock.average_daily_volume%>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Open:</strong><br /><%= @stock.open %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "open", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"open",
+						@payload["open"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Open:</strong><br /> <%= @stock.open %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Close:</strong><br /> <%= @stock.previous_close %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "previous_close", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"previous_close",
+						@payload["previous_close"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Close:</strong><br /> <%= @stock.previous_close %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Ask:</strong><br /> <%= @stock.ask %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "ask", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"ask",
+						@payload["ask"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Ask:</strong><br /> <%= @stock.ask %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Bid:</strong><br /> <%= @stock.bid %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "bipayload[]d", "bid", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"bid",
+						@payload["bid"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Bid:</strong><br /> <%= @stock.bid %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Book Value:</strong><br /> <%= @stock.book_value %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "book_value", false %>
+					<%= check_box_tag "payload[]",
+					"book_value",
+					@payload["book_value"] ? true : false %>
 					<span class="lever"></span>
 					On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Book Value:</strong><br /> <%= @stock.book_value %>
-
 				</div>
 			</li>
 			<!-- Add highlighting for minus -->
 			<li class="collection-item col s12 m4">
+				
+				<strong>Change:</strong><br /> <%= @stock.change %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "change", false %>
+					<%= check_box_tag "payload[]",
+					"change",
+					@payload["change"] ? true : false %>
 					<span class="lever"></span>
 					On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Change:</strong><br /> <%= @stock.change %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Percent Change: </strong><br /><%= @stock.changein_percent %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "changein_percent", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"changein_percent",
+						@payload["changein_percent"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Percent Change: </strong><br /><%= @stock.changein_percent %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Change From Year High:</strong><br /> <%= @stock.change_from_year_high %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "changein_percent", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"changein_percent",
+						@payload["changein_percent"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Change From Year High:</strong><br /> <%= @stock.change_from_year_high %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Change From Year Low:</strong><br /><%= @stock.change_from_year_low %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "change_from_year_low", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"change_from_year_low",
+						@payload["change_from_year_low"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Change From Year Low:</strong><br /><%= @stock.change_from_year_low %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Change and Percent Change:</strong><br /> <%= @stock.change_percent_change %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "change_percent_change", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"change_percent_change",
+						@payload["change_percent_change"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Change and Percent Change:</strong><br /> <%= @stock.change_percent_change %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Day's High:</strong><br /> <%= @stock.days_high %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "days_high", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"days_high",
+						@payload["days_high"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Day's High:</strong><br /> <%= @stock.days_high %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Day's Low:</strong><br /> <%= @stock.days_low %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "days_low", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"days_low",
+						@payload["days_low"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Day's Low:</strong><br /> <%= @stock.days_low %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Fifty Day Moving Average:</strong><br /> <%= @stock.fiftyday_moving_average %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-				<%= check_box_tag "payload[]", "fiftyday_moving_average", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"fiftyday_moving_average",
+						@payload["fiftyday_moving_average"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Fifty Day Moving Average:</strong><br /> <%= @stock.fiftyday_moving_average %>
-
 				</div>
 			</li>
 			
 			<li class="collection-item col s12 m4">
+				
+				<strong>Market Cap:</strong><br /> <%= @stock.market_capitalization %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "market_capitalization", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"market_capitalization",
+						@payload["market_capitalization"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Market Cap:</strong><br /> <%= @stock.market_capitalization %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>One Year Target Price:</strong><br /> <%= @stock.oneyr_target_price %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "oneyr_target_price", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"oneyr_target_price",
+						@payload["oneyr_target_price"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				One Year Target Price:</strong><br /> <%= @stock.oneyr_target_price %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Year High:</strong><br /> <%= @stock.year_high %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "year_high", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"year_high",
+						@payload["year_high"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Year High:</strong><br /> <%= @stock.year_high %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Year Low:</strong><br /> <%= @stock.year_low %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "year_low", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"year_low",
+						@payload["year_low"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Year Low:</strong><br /> <%= @stock.year_low %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Price / Sales:</strong><br /> <%= @stock.price_sales %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "price_sales", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"price_sales",
+						@payload["price_sales"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Price / Sales:</strong><br /> <%= @stock.price_sales %>
-
 				</div>
 			</li>
 			<li class="collection-item col s12 m4">
+				
+				<strong>Short Ratio:</strong><br /> <%= @stock.short_ratio %>
+				
 				<div class="switch secondary-content">
 					<label>
 	      				Off
-					<%= check_box_tag "payload[]", "price_sales", false %>
-					<span class="lever"></span>
-					On
+						<%= check_box_tag "payload[]",
+						"price_sales",
+						@payload["price_sales"] ? true : false %>
+						<span class="lever"></span>
+						On
 					</label>
-				</div>
-				<div class="">
-				<strong>
-				Short Ratio:</strong><br /> <%= @stock.short_ratio %>
-
 				</div>
 			</li>
 		</ul>

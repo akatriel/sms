@@ -8,69 +8,38 @@ class StocksController < ApplicationController
 		up_to_date = false
 		couldnt_find_stocks = []
 		found_stocks = []
-		has_stock = false
 
-		# need to store each ticker that we cant find into separate object	
-		# to list in error 
+
 		splitTicker.each do | ticker |
-			stock = Stock.where(symbol: ticker).order(updated_at: :desc)
-			
-			has_stock = false
+			dbstocks = Stock.where(symbol: ticker)
 
-			if stock.exists?
-				has_stock = true
+			if dbstocks.exists?
+				dbstock = dbstocks.first
+				unless Asset.where(user_id:@user.id, stock_id: dbstock.id).exists?
 
-				stock = stock.first
-				# #######################################
-				# if the latestPriceDate is older than the previous market date then update from api
-				# TODO add holidays to db
-				# #######################################
-				# if is_within_market_hours and (1.hour.ago <=> stock.updated_at) >= 0
-
-					# If we are inside market hours and the stock hasnt been updated in the db recently (1hr) we need to update model
-					# old_stock = stock
-					# new_stock = StockQuote::Stock.quote tidy_ticker(ticker)
-
-					#  updates every single stock of that user that is out of date with the data returned from the most recent quote
-					# @user.stocks.update hashify_stock(stock)
-					
-					# add asset if none exists
-					# old_stock.update hashify_stock new_stock
-				# end
-				# if we get here then the stock is already in the db and up to date we just need to link it as an asset for the user
-
-				# check for existing asset between stock and user if not create
-				unless Asset.where(user_id:@user.id, stock_id: stock.id).exists?
-
-					Asset.create(user_id: @user.id, stock_id: stock.id)
-					found_stocks << stock.symbol
+					Asset.create(user_id: @user.id, stock_id: dbstock.id)
+					found_stocks << dbstock.symbol
 				end
 			else
 				stocks = StockQuote::Stock.quote tidy_ticker(ticker)
 
 				# if 0 are returned
 				if stocks.response_code == 404
+					couldnt_find_stocks << ticker
 
-				has_stock = false
-				couldnt_find_stocks << ticker
 				# if only 1 is returned
 				elsif stocks.class == StockQuote::Stock
-
 					@user.stocks.create hashify_stock(stocks)
-					has_stock = true
+			
 					found_stocks << stocks.symbol
 				# if multiple are returned
 				else
 					stocks.each do |stock|
 						if stock.success?
-
 							@user.stocks.create hashify_stock(stock)
 							found_stocks << stock.symbol
-						else
-
 						end		
 					end	
-					has_stock = true
 				end
 			end
 		end
@@ -94,6 +63,12 @@ class StocksController < ApplicationController
 	def show
 		@stock = Stock.find params[:id]
 		@asset = @stock.assets.where(user_id: current_user.id, stock_id: @stock.id).first
+		@payload = @asset.payload
+
+		if @payload.nil?
+			@payload = Payload.create(asset_id: @asset.id)
+		end
+		@displaytext = Displaytext.first
 
 		begin
 			new_stock = StockQuote::Stock.quote @stock.symbol
@@ -101,9 +76,11 @@ class StocksController < ApplicationController
 			@stock.update hashify_stock new_stock
 		rescue
 			flash[:alert] = "There was a problem getting info on that ticker"
-			redirect_to user_path(@user)
+			redirect_to user_path(current_user)
 		end
 	end
+
+
 
 	def destroy
 		@stock = Stock.find params[:id]
@@ -122,20 +99,20 @@ class StocksController < ApplicationController
 		ticker.split(',').map{|s| s.strip }.join(',')
 	end
 
-	def is_within_market_hours
-		# may eventually need to abstract this to handle markets  in different time zones
+	# def is_within_market_hours
+	# 	# may eventually need to abstract this to handle markets  in different time zones
 
-		local_time = Time.now.in_time_zone "Eastern Time (US & Canada)"
-		weekday = false
-		weekend = false
-		holiday = false
-		# between 10am and 4 pm EST and during a weekday
-		if local_time.hour >= 10 and local_time.hour <= 16 and local_time.wday >= 1 and local_time.wday <= 5
-			weekday = true
-		else 
-			weekend = true
-		end
-	end
+	# 	local_time = Time.now.in_time_zone "Eastern Time (US & Canada)"
+	# 	weekday = false
+	# 	weekend = false
+	# 	holiday = false
+	# 	# between 10am and 4 pm EST and during a weekday
+	# 	if local_time.hour >= 10 and local_time.hour <= 16 and local_time.wday >= 1 and local_time.wday <= 5
+	# 		weekday = true
+	# 	else 
+	# 		weekend = true
+	# 	end
+	# end
 
 	def hashify_stock stock
 		return {
