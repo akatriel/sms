@@ -23,10 +23,10 @@ $primary-color-dark: false !default;
 @if not $primary-color-dark {
 	$primary-color-dark: darken($primary-color, 15%);
 }
-$secondary-color: color("cyan", "darken-1") !default;
+$secondary-color: color("orange", "lighten-2") !default;
 $success-color: color("green", "base") !default;
 $error-color: color("red", "base") !default;
-
+$accent-color: color("orange", "lighten-4");
 $link-color: color("light-blue", "darken-1") !default;
 
 @import "materialize";
@@ -40,38 +40,69 @@ $link-color: color("light-blue", "darken-1") !default;
 	background-size:cover;
 	
 }
-
-.users > .container > .header {
-	background: $primary-color-light;
-	padding: 5%;
-	margin-top:50px;
-	color:white;
-}
-.stocks > .container > .header {
-	background: $primary-color-light;
-	padding: 5%;
-	margin-top:50px;
-	color:white;
-}
-
-#stocks {
-	color:white;
-	.collection-header{
-		background:$primary-color;
+.side-nav {
+	background:$primary-color;
+	li.collection-item {
+		a,i.material-icons {
+			color: $accent-color;
+		}	
 	}
+}
+.login{
+	i.material-icons, label{
+		color: $accent-color;
+	}
+	color: $accent-color;
+}
+.header{
+	background: $primary-color-light;
+	padding: 2%;
+	margin-top:50px;
+	color:white;
+}
+
+.modal, #modal-footer.modal-footer{
+	background: $primary-color-light;
+	color:white;
+	label {
+		color: $accent-color;
+	}
+}
+h1,h2,h3,h4, #nav-mobile {
+	color: $secondary-color;
+	a{ 
+		color: $secondary-color;
+	}
+	#brand-logo{ 
+		color: $secondary-color;
+	}
+}
+
+.collection {
+	#portfolio-header{
+		background: $primary-color;
+	}
+		color: $accent-color;
+	.collection-item{
+		font-size: 18px;
+		strong {
+			font-size: 90%;
+			color:white;
+		}
+	}
+
 	.collection-item:nth-child(2n){
 		background:$primary-color-light;
 	}
 	.collection-item:nth-child(2n + 1){
 		background:$primary-color;
 	}
-	
 }
 
 // form errors on user CRUD
 ul {
 	li.error {
-		color: color("red", "base");
+		color: $error-color;
 	}
 }
 // Safari Modal fix with clockpicker

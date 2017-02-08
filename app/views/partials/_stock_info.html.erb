@@ -4,7 +4,7 @@
 		<%= hidden_field_tag "id", @asset.id %>
 
 		<ul class="collection row">
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Last Trade Date:</strong><br /><%= @stock.last_trade_date.strftime '%m/%d/%Y' %>
 				
@@ -19,7 +19,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Last Trade Time:</strong><br /> <%= @stock.last_trade_time %>
 				
@@ -34,7 +34,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Last Trade Price:</strong><br /> <%= @stock.last_trade_price_only %>
 				
@@ -49,7 +49,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Avg. Daily Volume:</strong><br /> <%= @stock.average_daily_volume%>
 				
@@ -64,7 +64,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Open:</strong><br /><%= @stock.open %>
 				
@@ -79,7 +79,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Close:</strong><br /> <%= @stock.previous_close %>
 				
@@ -94,7 +94,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Ask:</strong><br /> <%= @stock.ask %>
 				
@@ -109,7 +109,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Bid:</strong><br /> <%= @stock.bid %>
 				
@@ -124,7 +124,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Book Value:</strong><br /> <%= @stock.book_value %>
 				
@@ -140,7 +140,7 @@
 				</div>
 			</li>
 			<!-- Add highlighting for minus -->
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Change:</strong><br /> <%= @stock.change %>
 				
@@ -155,7 +155,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Percent Change: </strong><br /><%= @stock.changein_percent %>
 				
@@ -170,7 +170,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Change From Year High:</strong><br /> <%= @stock.change_from_year_high %>
 				
@@ -185,7 +185,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Change From Year Low:</strong><br /><%= @stock.change_from_year_low %>
 				
@@ -200,7 +200,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Change and Percent Change:</strong><br /> <%= @stock.change_percent_change %>
 				
@@ -215,7 +215,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Day's High:</strong><br /> <%= @stock.days_high %>
 				
@@ -230,7 +230,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Day's Low:</strong><br /> <%= @stock.days_low %>
 				
@@ -245,7 +245,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Fifty Day Moving Average:</strong><br /> <%= @stock.fiftyday_moving_average %>
 				
@@ -261,7 +261,7 @@
 				</div>
 			</li>
 			
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Market Cap:</strong><br /> <%= @stock.market_capitalization %>
 				
@@ -276,7 +276,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>One Year Target Price:</strong><br /> <%= @stock.oneyr_target_price %>
 				
@@ -291,7 +291,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Year High:</strong><br /> <%= @stock.year_high %>
 				
@@ -306,7 +306,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Year Low:</strong><br /> <%= @stock.year_low %>
 				
@@ -321,7 +321,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Price / Sales:</strong><br /> <%= @stock.price_sales %>
 				
@@ -336,7 +336,7 @@
 					</label>
 				</div>
 			</li>
-			<li class="collection-item col s12 m4">
+			<li class="collection-item col s12">
 				
 				<strong>Short Ratio:</strong><br /> <%= @stock.short_ratio %>
 				

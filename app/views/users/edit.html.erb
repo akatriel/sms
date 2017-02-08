@@ -1,8 +1,10 @@
-<h1 class="center">Editing User</h1>
+<div class="container header">
 
-<%= render 'form', user: @user %>
-<div class="container">
-	<%= button_to user_path(@user), method: :delete,  data: {:confirm => 'Are you sure?'}, class: "right btn waves-effect waves-light" do%>
-		      <i class="material-icons left">delete</i>Delete Account
+	<h1 class="center">Editing User</h1>
+
+	<%= render 'form', user: @user %>
+	<br />
+	<%= button_to user_path(@user), method: :delete,  data: {:confirm => 'Are you sure?'}, class: "btn waves-effect waves-light" do%>
+		<i class="material-icons left">delete</i>Delete Account
 	<% end %>
 </div>

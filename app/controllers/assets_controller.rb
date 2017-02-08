@@ -1,8 +1,8 @@
 class AssetsController < ApplicationController
 	def setAsset
 		asset = Asset.find params[:asset_id]
-		high = params[:high].nil? ? nil : params[:high]
-		low = params[:low].nil? ? nil : params[:low]
+		high = params[:high].blank? ? nil : params[:high]
+		low = params[:low].blank? ? nil : params[:low]
 
 		unless params[:start_time].empty? and params[:finish_time].empty?
 			start_time = params[:start_time].to_time
@@ -14,18 +14,15 @@ class AssetsController < ApplicationController
 			end
 		end
 
-		
-
 		respond_to do |format|
-			if finish_time.nil? || start_time.nil?
+			if finish_time.nil? || start_time.nil? || (high.nil? and low.nil?)
 				# TODO display flash message and display it within modal instead of rendering page again.
-				flash.now[:alert] = "Could not set alert. Check start and finish times."
-				format.html {render stock_path asset.stock_id}
+				flash.now[:alert] = "Could not set alert."
+			else
+				asset.update_attributes high: high, low:low, start_time: start_time, finish_time: finish_time
+				flash.now[:notice] = "Alert Has Been Set"
 			end
-			if (asset.update_attributes high: high, low:low, start_time: start_time, finish_time: finish_time)
-				flash.now[:notice] = "Alert Has Been Set" #not showing
-				format.js{ render file: 'assets/_set_asset_success.js.erb'}
-			end
+			format.js{ render file: 'assets/_set_asset.js.erb'}	
 		end
 	end
 
