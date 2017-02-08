@@ -5,32 +5,41 @@
 			<div class="modal-header center">
 				<h4>Set Price Alerts</h4>
 				<p class="center">If the finish time is before the start time the program will assume that the finish time is for the next day.</p>
+				<p class="center">Start and finish times must be filled out, but either a ceiling or roof must be entered.</p>
 			</div>
 			<div class="modal-body center">
 				<%= hidden_field_tag :asset_id, @asset.id %>
 				<div class="input-field inline">
-					<%= label_tag :high, "Set High:" %>
+					<%= label_tag :high, "Set Ceiling:" %>
 					<%= number_field_tag :high, @asset.high, step: 0.01 %>
 				</div>
 				<div class="input-field inline">
-					<%= label_tag :low, "Set Low:" %>
+					<%= label_tag :low, "Set Floor:" %>
 					<%= number_field_tag :low, @asset.low, step: 0.01 %>
 				</div>
 				<div class="row">
                     <div class="input-field inline">
                         <label for="start_time">Start Time</label>
                         <input id="startTime" class="timepicker" name="start_time" type="time" class="active">
-                        <%= hidden_field_tag :start_time, '' %>
+                        <% unless @asset.start_time.nil? %>
+                        	<%= hidden_field_tag :start_time, @asset.start_time.in_time_zone('Eastern Time (US & Canada)').strftime("%H:%M") %>
+                        <% else %>
+							<%= hidden_field_tag :start_time, Time.now.strftime("%H:%M") %>
+                        <% end %>
                     </div>
                    
                      <div class="input-field inline">
                         <label for="finish_time">Finish Time</label>
                         <input id="finishTime" class="timepicker" name="finish_time" type="time" class="active">
-                        <%= hidden_field_tag :finish_time, '' %>
+                         <% unless @asset.finish_time.nil? %>
+                        	<%= hidden_field_tag :finish_time, @asset.finish_time.in_time_zone('Eastern Time (US & Canada)').strftime("%H:%M") %>
+                        <% else %>
+							<%= hidden_field_tag :finish_time, Time.now.in_time_zone('Eastern Time (US & Canada)').strftime("%H:%M") %>
+                        <% end %>
                     </div>
                 </div>
 			</div>
-			<div class="modal-footer">
+			<div id="modal-footer" class="modal-footer">
 				<button type="button" class="btn btn-default" onClick="$('.modal').modal('close');">Close</button>
 				<%= button_tag id: "saveBTN", class: "btn", disable_with: "Saving..." do %>
 					 <i class="material-icons left">input</i>Save

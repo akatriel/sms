@@ -1,11 +1,14 @@
 <div class="container">
-	<h1><%= @stock.symbol %> - <%= @stock.name %> - <%= @stock.stock_exchange %></h1>
-	
-	<button id="openModal" class="btn waves-effect waves-light" data-target="myModal">Set Price Alerts</button>
-
-	<hr />
-	<h2>Customize SMS Payload:</h2>
-	<%= render 'partials/stock_info' %>
+	<div class='center header z-depth-2'>
+		<h1 class=""><%= @stock.symbol %> - <%= @stock.name %> - <%= @stock.stock_exchange %></h1>
+		<div class="">
+			<button id="openModal" class="btn waves-effect waves-light" data-target="myModal">Set Price Alerts</button>
+		</div>
+	</div>
+	<div class="header z-depth-2">
+		<h2>Customize SMS Payload:</h2>
+		<%= render 'partials/stock_info' %>
+	</div>
 </div>
 
 <%= render 'partials/stock_modal' %>

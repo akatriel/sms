@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="center">
+	<div class="center header z-depth-2">
 		<h1> Welcome, <%= @user.username %> </h1>
 		<%= link_to edit_user_path(@user), class: "btn waves-effect waves-light btn" do %>
 			      <i class="material-icons left">mode_edit</i>
@@ -16,11 +16,10 @@
 				<% end %>
 			<% end %>
 		</div>
-		<hr>
 	</div>
 			
 	<ul id="stocks" class="collection with-header">
-		<li class="collection-header"><h2>Portfolio</h2></li>
+		<li id="portfolio-header" class="collection-header"><h2>Portfolio</h2></li>
 		<%= render @stocks %>
 	</ul>
 </div>

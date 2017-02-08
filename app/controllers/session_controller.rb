@@ -1,5 +1,6 @@
 class SessionController < ApplicationController
 	def new
+		@user = User.new
 	end
 	def create
 		user = User.where(username: params[:username]).first
@@ -8,12 +9,12 @@ class SessionController < ApplicationController
 			session[:user_id] = user.id
 			redirect_to current_user
 		else
-			flash[:notice] = "There was a problem creating a session."
+			flash.now[:alert] = "There was a problem creating a session."
 			render :new
 		end
 	end
 	def destroy
-		session[:user_id] = nil
+		session.clear
 		redirect_to '/login'
 	end
 end

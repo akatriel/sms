@@ -1,8 +1,9 @@
 <nav>
 	<div class="nav-wrapper">
-		<%= link_to :root, class: "brand-logo center" do %>
+		<%= link_to :root, class: "brand-logo center", id: "brand-logo" do %>
 			<i class="medium material-icons left">textsms</i>Stock Message Service
 		<% end %>
+		<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 		<ul id="nav-mobile" class="left hide-on-med-and-down">
 			<% if !current_user %>
 				<li>
@@ -29,5 +30,32 @@
 				</li>
 			<% end %>
 		</ul>
+		<ul id="mobile-demo" class="side-nav collection left">
+			<% if !current_user %>
+				<li class="collection-item">
+					<%= link_to new_user_path, class: "" do %>
+						<i class="medium material-icons left">perm_contact_calendar</i>Sign Up for SMS Updates
+					<% end %>
+				</li>
+				<li class="collection-item">
+					<%= link_to login_path, class: "" do %>
+						<i class="medium material-icons left">lock_open</i>Login
+					<% end %>
+				</li>
+			<% else %>
+				<li class="collection-item">
+					<%= link_to user_path(current_user.id), class: "" do %>
+						<i class="medium material-icons left">perm_identity</i>Portfolio 
+					<% end %>
+				</li>
+				<li class="collection-item">
+					<%= link_to logout_path, class: "", method: :delete do %>
+						<i class="medium material-icons left">lock_outline</i>Logout
+
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
 	</div>
 </nav>
+

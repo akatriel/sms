@@ -9,34 +9,107 @@
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
+
+
+ *= require materialize.clockpicker
 */
+@import "materialize/components/color";
+$primary-color: color("blue-grey", "darken-3") !default;
+$primary-color-light: false !default;
+$primary-color-dark: false !default;
+@if not $primary-color-light {
+	$primary-color-light: lighten($primary-color, 15%);
+}
+@if not $primary-color-dark {
+	$primary-color-dark: darken($primary-color, 15%);
+}
+$secondary-color: color("orange", "lighten-2") !default;
+$success-color: color("green", "base") !default;
+$error-color: color("red", "base") !default;
+$accent-color: color("orange", "lighten-4");
+$link-color: color("light-blue", "darken-1") !default;
+
+@import "materialize";
 /*
-	*= require materialize.clockpicker
     *= require_self
 
 */
-
-@import "materialize";
 
 .home {
 	background-image: url(http://s8.postimg.org/ow4wgk4px/ugqti_Lg.jpg);
 	background-size:cover;
 	
 }
-
-
-.row.is-flex {
-    display: flex;
-    flex-wrap: wrap;
+.side-nav {
+	background:$primary-color;
+	li.collection-item {
+		a,i.material-icons {
+			color: $accent-color;
+		}	
+	}
 }
-.row.is-flex > [class*='col-'] {
-    display: flex;
-    flex-direction: column;
+.login{
+	i.material-icons, label{
+		color: $accent-color;
+	}
+	color: $accent-color;
+}
+.header{
+	background: $primary-color-light;
+	padding: 2%;
+	margin-top:50px;
+	color:white;
 }
 
-// .is-flex {
-// 	li:hover {
-// 		background: #337ab7;
-// 		color:white; 
-// 	}
-// }
+.modal, #modal-footer.modal-footer{
+	background: $primary-color-light;
+	color:white;
+	label {
+		color: $accent-color;
+	}
+}
+h1,h2,h3,h4, #nav-mobile {
+	color: $secondary-color;
+	a{ 
+		color: $secondary-color;
+	}
+	#brand-logo{ 
+		color: $secondary-color;
+	}
+}
+
+.collection {
+	#portfolio-header{
+		background: $primary-color;
+	}
+		color: $accent-color;
+	.collection-item{
+		font-size: 18px;
+		strong {
+			font-size: 90%;
+			color:white;
+		}
+	}
+
+	.collection-item:nth-child(2n){
+		background:$primary-color-light;
+	}
+	.collection-item:nth-child(2n + 1){
+		background:$primary-color;
+	}
+}
+
+// form errors on user CRUD
+ul {
+	li.error {
+		color: $error-color;
+	}
+}
+// Safari Modal fix with clockpicker
+div#myModal.modal.bottom-sheet.open{
+	overflow: visible;
+}
+
+.collection-item.stock {
+	overflow:hidden;
+}
