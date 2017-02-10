@@ -36,9 +36,23 @@ $link-color: color("light-blue", "darken-1") !default;
 */
 
 .home {
-	background-image: url(http://s8.postimg.org/ow4wgk4px/ugqti_Lg.jpg);
+	// background-image: url(http://s8.postimg.org/ow4wgk4px/ugqti_Lg.jpg);
+	// background-size:auto, no-repeat;
+	background-image: url(<%= asset_path 'fbgt.jpg' %>);
 	background-size:cover;
-	
+
+	.container{
+		h1,h2{
+			color:$secondary-color;
+		}
+		background: $primary-color;
+		padding:20px;
+		width:100%;
+		position:absolute;
+		top:50%;
+		left:50%;
+		transform: translate(-50%,-50%);
+	}
 }
 .side-nav {
 	background:$primary-color;
@@ -112,4 +126,8 @@ div#myModal.modal.bottom-sheet.open{
 
 .collection-item.stock {
 	overflow:hidden;
+}
+
+@media #{$small-and-down} {
+	
 }
