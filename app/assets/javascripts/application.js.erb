@@ -18,27 +18,27 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
+	$('.modal').modal();
 	$(".button-collapse").sideNav({
 		menuWidth: 600,
 		draggable: true
 	});
 	
 	$('#openModal').click( function(){
-		$('.modal').modal({
-			dismissible: true
-		});
+		$('#myModal').modal('open');
 	});
 
 	$('.timepicker').pickatime({
 	    default: 'now',
-		twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
-		donetext: 'OK',
-		autoclose: false,
-		vibrate: true, // vibrate the device when dragging clock hand
-		afterDone: function(){
-			Materialize.updateTextFields();
-		}
+			twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
+			donetext: 'OK',
+			autoclose: false,
+			vibrate: true, // vibrate the device when dragging clock hand
+			afterDone: function(){
+				Materialize.updateTextFields();
+			}
 	});
+
 	$('#saveBTN').click(function(){
 		var startTime = $('#startTime').val();
 		var finishTime = $('#finishTime').val();
