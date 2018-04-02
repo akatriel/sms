@@ -77,7 +77,6 @@ def send_message phone, body, asset
 	account_sid = ENV["twilio_account_sid"]
 	auth_token = ENV["twilio_auth_token"]
 	client = Twilio::REST::Client.new account_sid, auth_token
-	byebug
 	begin
 		client.messages.create(
 			from: "+1#{ENV["twilio_number"]}",#provided by twilio
