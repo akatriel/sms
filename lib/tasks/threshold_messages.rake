@@ -43,7 +43,7 @@ namespace :threshold_messages do
 						end
 						
 						if message_options.size == 0
-							message_body = "\nSymbol: #{symbol}\nLast Trade Price: #{price}\n #{trade_time} on #{trade_date}"
+							message_body = "\nSymbol: #{symbol}\nLast Trade Price: #{price}\n #{trade_time}"
 							message_body << "\nfinance.yahoo.com/quote/#{symbol}?p=#{symbol}"
 						else 
 							display_text = Displaytext.first
